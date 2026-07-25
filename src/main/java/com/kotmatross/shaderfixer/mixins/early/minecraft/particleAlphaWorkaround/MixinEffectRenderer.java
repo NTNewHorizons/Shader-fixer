@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -17,16 +17,12 @@ public class MixinEffectRenderer {
 
     @WrapMethod(method = "renderParticles")
     private void dontCastShadowParticles(Entity p_78874_1_, float p_78874_2_, Operation<Void> original) {
-        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
-            original.call(p_78874_1_, p_78874_2_);
-        }
+        if (!AngelicaUtilsW.isShadowPass()) original.call(p_78874_1_, p_78874_2_);
     }
 
     @WrapMethod(method = "renderLitParticles")
     private void dontCastShadowLitParticles(Entity p_78874_1_, float p_78874_2_, Operation<Void> original) {
-        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
-            original.call(p_78874_1_, p_78874_2_);
-        }
+        if (!AngelicaUtilsW.isShadowPass()) original.call(p_78874_1_, p_78874_2_);
     }
 
     // todo: Need to fix it properly, not this hacky hack
@@ -43,7 +39,7 @@ public class MixinEffectRenderer {
                 , remap = false)
             , index = 0)
     private int workaroundComplementaryParticleAlpha(int sfactor, int dfactor) {
-        return AngelicaUtils_WRAPPER.isComplementary() ? GL11.GL_ONE : sfactor;
+        return AngelicaUtilsW.isComplementary() ? GL11.GL_ONE : sfactor;
     }
 
 }

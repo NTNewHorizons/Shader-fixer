@@ -15,32 +15,28 @@ public class MixinRenderHelper {
 
     @Inject(method = "drawCuboidSurface"
             , at = @At(value = "HEAD"))
-    private static void drawCuboidSurface$programS(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(ShaderUtils.getCurrentProgram());
+    private static void drawCuboidSurface$programS(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        sf$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
     @Inject(method = "drawCuboidSurface"
             , at = @At(value = "TAIL"))
-    private static void drawCuboidSurface$programE(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        ShaderUtils.useProgram(shader_fixer$program.get());
+    private static void drawCuboidSurface$programE(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        ShaderUtils.useProgram(sf$program.get());
     }
 
     @Inject(method = "drawCuboidOutline"
             , at = @At(value = "HEAD"))
-    private static void drawCuboidOutline$programS(CallbackInfo ci,
-        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        shader_fixer$program2.set(ShaderUtils.getCurrentProgram());
+    private static void drawCuboidOutline$programS(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        sf$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
     @Inject(method = "drawCuboidOutline"
             , at = @At(value = "TAIL"))
-    private static void drawCuboidOutline$programE(CallbackInfo ci,
-        @Share("shader_fixer$program2") LocalIntRef shader_fixer$program2) {
-        ShaderUtils.useProgram(shader_fixer$program2.get());
+    private static void drawCuboidOutline$programE(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        ShaderUtils.useProgram(sf$program.get());
     }
 
 }

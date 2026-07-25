@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.RenderItemInFrameEvent;
 import org.lwjgl.opengl.GL11;
 
 import com.kotmatross.shaderfixer.Tags;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -22,7 +22,7 @@ public class BratvaAndTheRing {
     public void onRenderItemInFrame(RenderItemInFrameEvent event) {
         if (event.item != null && event.item.getItem() == Items.gold_nugget) {
             event.setCanceled(true);
-            if (AngelicaUtils_WRAPPER.isShadowPass()) return;
+            if (AngelicaUtilsW.isShadowPass()) return;
 
             double PIXEL = 1D / 16D;
             double OFFSET = PIXEL * 2.75D;

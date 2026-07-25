@@ -10,7 +10,6 @@ import net.minecraft.launchwrapper.Launch;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 import com.kotmatross.shaderfixer.ShaderFixer;
-import com.kotmatross.shaderfixer.Tags;
 import com.kotmatross.shaderfixer.asm.EarlyMixins;
 import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
 
@@ -19,7 +18,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.Name("ShaderFixerEarlyMixins")
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class ShaderFixerEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoader {
-
+    
     @Override
     public String getMixinConfig() {
         return "mixins.shaderfixer.early.json";

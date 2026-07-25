@@ -19,8 +19,8 @@ public class MixinAuroraRenderer {
                 , ordinal = 0
                 , shift = At.Shift.BEFORE))
     private static void renderAuroraPR(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(ShaderUtils.getCurrentProgram());
+        @Share("sf$program") LocalIntRef sf$program) {
+        sf$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
@@ -30,8 +30,8 @@ public class MixinAuroraRenderer {
                 , ordinal = 0
                 , shift = At.Shift.AFTER))
     private static void renderAuroraPRE(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        ShaderUtils.useProgram(shader_fixer$program.get());
+        @Share("sf$program") LocalIntRef sf$program) {
+        ShaderUtils.useProgram(sf$program.get());
     }
 
 }

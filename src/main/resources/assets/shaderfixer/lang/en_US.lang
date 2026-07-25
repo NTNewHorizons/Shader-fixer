@@ -1,3 +1,12 @@
+
+# ShaderFixer
+bsod.invalid=Detected invalid internal state
+bsod.crash.attrib=Prevented potential world corruption and misleading crash stacktrace
+
+bsod.esc=* Press ESC to safely return to the main menu.
+bsod.enter=* Press ENTER to report an issue to:
+bsod.log=Attach the `logs/fml-client-latest.log` file.
+
 # HbmExtendedHazardDescriptions
 info.template__seconds= second(s)
 trait.danger.level.hydro=Explosion force: 
@@ -5,4 +14,4 @@ trait.danger.level.hot=Ignites for:
 trait.danger.level.explosive=Explosion force: 
 trait.danger.level.coal=Coal dust/s: 
 trait.danger.level.blinding=Blinds for: 
-trait.danger.level.asbestos=Asbestos/s: 
+trait.danger.level.asbestos=Asbestos/s:

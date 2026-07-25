@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.shrimp.nonsense.FuckingCursed;
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 
 /**
  * Main NTM gun fix
@@ -53,11 +53,11 @@ public class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson"
             , at = @At(value = "HEAD"))
     public void init(float interp, CallbackInfo ci) {
-        if (NTMUtils_WRAPPER.checkVibe()) {
-            NTMUtils_WRAPPER.handleInterpolation(interp);
-            swayMagnitude = NTMUtils_WRAPPER.getGunsSwayMagnitude(itemToRender);
-            swayPeriod = NTMUtils_WRAPPER.getGunsSwayPeriod(itemToRender);
-            turnMagnitude = NTMUtils_WRAPPER.getGunsTurnMagnitude(itemToRender);
+        if (NTMUtilsW.checkVibe()) {
+            NTMUtilsW.handleInterpolation(interp);
+            swayMagnitude = NTMUtilsW.getGunsSwayMagnitude(itemToRender);
+            swayPeriod = NTMUtilsW.getGunsSwayPeriod(itemToRender);
+            turnMagnitude = NTMUtilsW.getGunsTurnMagnitude(itemToRender);
         }
     }
     
@@ -68,10 +68,8 @@ public class MixinItemRenderer {
                 , remap = false
                 , ordinal = 2))
     private void modifyPitchRotation(float angle, float x, float y, float z, Operation<Void> original) {
-        if (NTMUtils_WRAPPER.checkVibe())
-            original.call(angle * turnMagnitude, x, y, z);
-        else
-            original.call(angle, x, y, z);
+        if (NTMUtilsW.checkVibe()) original.call(angle * turnMagnitude, x, y, z);
+        else original.call(angle, x, y, z);
     }
     
     /// CHANGED IN NTM
@@ -81,10 +79,8 @@ public class MixinItemRenderer {
                 , remap = false
                 , ordinal = 3))
     private void modifyYawRotation(float angle, float x, float y, float z, Operation<Void> original) {
-        if (NTMUtils_WRAPPER.checkVibe())
-            original.call(angle * turnMagnitude, x, y, z);
-        else
-            original.call(angle, x, y, z);
+        if (NTMUtilsW.checkVibe()) original.call(angle * turnMagnitude, x, y, z);
+        else original.call(angle, x, y, z);
     }
     
     /// REMOVED IN NTM
@@ -94,7 +90,7 @@ public class MixinItemRenderer {
                 , remap = false
                 , ordinal = 7))
     private boolean skipT(float x, float y, float z) {
-        return !NTMUtils_WRAPPER.checkVibe();
+        return !NTMUtilsW.checkVibe();
     }
     
     /// REMOVED IN NTM
@@ -104,7 +100,7 @@ public class MixinItemRenderer {
                 , remap = false
                 , ordinal = 18))
     private boolean skipR(float angle, float x, float y, float z) {
-        return !NTMUtils_WRAPPER.checkVibe();
+        return !NTMUtilsW.checkVibe();
     }
     
     /// REMOVED IN NTM
@@ -114,7 +110,7 @@ public class MixinItemRenderer {
                 , remap = false
                 , ordinal = 3))
     private boolean skipS(float x, float y, float z) {
-        return !NTMUtils_WRAPPER.checkVibe();
+        return !NTMUtilsW.checkVibe();
     }
     
     /// ADDED IN NTM
@@ -124,9 +120,7 @@ public class MixinItemRenderer {
                 , shift = At.Shift.BEFORE
                 , remap = false))
     private void addGlRotated(float interp, CallbackInfo ci) {
-        if (NTMUtils_WRAPPER.checkVibe()) {
-            GL11.glRotated(180, 0, 1, 0);
-        }
+        if (NTMUtilsW.checkVibe()) GL11.glRotated(180, 0, 1, 0);
     }
 
     /// ADDED IN NTM
@@ -136,7 +130,7 @@ public class MixinItemRenderer {
                 , shift = At.Shift.BEFORE
                 , remap = false))
     private void addFinalPreRenderStuff(float interp, CallbackInfo ci) {
-        if (NTMUtils_WRAPPER.checkVibe()) {
+        if (NTMUtilsW.checkVibe()) {
             if (mc.renderViewEntity instanceof EntityPlayer entityplayer) {
                 float distanceDelta = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
                 float distanceInterp = -(entityplayer.distanceWalkedModified + distanceDelta * interp);

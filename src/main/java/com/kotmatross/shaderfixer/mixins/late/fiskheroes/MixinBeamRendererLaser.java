@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.fiskmods.heroes.client.pack.json.beam.BeamRendererLaser;
 import com.fiskmods.heroes.client.pack.json.beam.Bloom;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 
@@ -30,7 +30,7 @@ public class MixinBeamRendererLaser {
                 , remap = true
                 , shift = At.Shift.AFTER))
     public void fixAlpha(CallbackInfo ci, @Local(name = "alpha") LocalFloatRef alpha) {
-        if (AngelicaUtils_WRAPPER.isShaderEnabled()) {
+        if (AngelicaUtilsW.isShaderEnabled()) {
             if (this.bloom != null) {
                 /* Dense - high alpha */
                 if (1.0F / this.bloom.getStrength() > 1.5F) alpha.set(0.4F);

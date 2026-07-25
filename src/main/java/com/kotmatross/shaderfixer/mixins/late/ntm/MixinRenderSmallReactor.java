@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.tileentity.RenderSmallReactor;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 
 @Mixin(value = RenderSmallReactor.class, priority = 999)
@@ -18,14 +18,14 @@ public class MixinRenderSmallReactor {
                 , target = "Lnet/minecraft/client/renderer/Tessellator;setColorRGBA_F(FFFF)V")
             , index = 3)
     private float alphaFix(float alpha) {
-        return AngelicaUtils_WRAPPER.isShaderEnabled() ? (alpha * 3F) : alpha;
+        return AngelicaUtilsW.isShaderEnabled() ? (alpha * 3F) : alpha;
     }
 
     @Inject(method = "renderTileEntityAt"
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"
                 , shift = At.Shift.BEFORE))
-    public void func_147500_a(CallbackInfo ci) {
+    public void eFB(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
@@ -33,7 +33,7 @@ public class MixinRenderSmallReactor {
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/Tessellator;draw()I"
                 , shift = At.Shift.AFTER))
-    public void func_147500_a2(CallbackInfo ci) {
+    public void dFB(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
 

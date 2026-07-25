@@ -22,10 +22,8 @@ public class MixinModelArmorInfinity extends ModelBiped {
                 , shift = At.Shift.BEFORE)
             , cancellable = true)
     private void render(CallbackInfo ci) {
-        if (this.legs) {
-            // If wings are rendered with `legs == true`, then it will fuck up lighting on entities (somehow)
-            ci.cancel(); 
-        }
+        /// If wings are rendered with `legs == true`, then it will fuck up lighting on entities (somehow)
+        if (this.legs) ci.cancel();
     }
 
 }

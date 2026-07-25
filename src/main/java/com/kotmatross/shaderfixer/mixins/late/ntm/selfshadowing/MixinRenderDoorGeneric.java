@@ -6,7 +6,7 @@ import com.hbm.main.ResourceManager;
 import com.hbm.render.tileentity.RenderDoorGeneric;
 import com.hbm.tileentity.DoorDecl;
 import com.kotmatross.shaderfixer.Tags;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.util.ResourceLocation;
@@ -29,11 +29,8 @@ public class MixinRenderDoorGeneric {
 				, remap = false))
 	private static AnimatedModel renderTileEntityAt(DoorDecl instance, Operation<AnimatedModel> original) {
 		AnimatedModel orig = original.call(instance);
-		if(orig == ResourceManager.transition_seal && AngelicaUtils_WRAPPER.isShadowPass()) {
-			return transition_seal_SHADOW_PROXY;
-		} else {
-			return orig;
-		}
+		return (orig == ResourceManager.transition_seal && AngelicaUtilsW.isShadowPass()) 
+				? transition_seal_SHADOW_PROXY : orig;
 	}
 	
 }

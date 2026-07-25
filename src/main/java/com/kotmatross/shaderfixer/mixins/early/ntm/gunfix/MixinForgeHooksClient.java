@@ -22,7 +22,6 @@ import com.kotmatross.shaderfixer.shrimp.Vibe;
  * 
  * @author kotmatross
  */
-
 @Mixin(value = ForgeHooksClient.class, priority = 1003, remap = false)
 public class MixinForgeHooksClient {
 

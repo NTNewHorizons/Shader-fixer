@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 import com.llamalad7.mixinextras.sugar.Local;
 
 /**
@@ -27,8 +27,8 @@ public class MixinEntityRenderer {
     @Inject(method = "renderHand"
             , at = @At(value = "HEAD"))
     public void handleInterp(float interp, int p_78476_2_, CallbackInfo ci) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            NTMUtils_WRAPPER.handleInterpolation(interp);
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
+            NTMUtilsW.handleInterpolation(interp);
         }
     }
 
@@ -39,8 +39,8 @@ public class MixinEntityRenderer {
                 , ordinal = 0)
             , index = 1)
     private boolean applyFovCFG(boolean useFOVSetting) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            return NTMUtils_WRAPPER.getFOVConf();
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
+            return NTMUtilsW.getFOVConf();
         }
         return false;
     }
@@ -49,8 +49,8 @@ public class MixinEntityRenderer {
     @ModifyConstant(method = "getFOVModifier"
             , constant = @Constant(floatValue = 70.0F, ordinal = 0))
     public float modifyBaseFOV(float fov, @Local(name = "entityplayer") EntityLivingBase entityplayer) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            return NTMUtils_WRAPPER.getGunsBaseFOV(entityplayer.getHeldItem());
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
+            return NTMUtilsW.getGunsBaseFOV(entityplayer.getHeldItem());
         }
         return fov;
     }

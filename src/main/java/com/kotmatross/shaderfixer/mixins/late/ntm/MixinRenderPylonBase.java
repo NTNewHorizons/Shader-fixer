@@ -15,7 +15,7 @@ public class MixinRenderPylonBase {
 
     @Inject(method = "drawLineSegment"
             , at = @At(value = "HEAD"))
-    private void drawLineSegment(CallbackInfo ci, @Local(argsOnly = true) Tessellator tessellator) {
+    private void fixBrightnessLine(CallbackInfo ci, @Local(argsOnly = true) Tessellator tessellator) {
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
     }
 

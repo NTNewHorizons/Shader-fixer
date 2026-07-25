@@ -4,37 +4,28 @@ import com.kotmatross.shaderfixer.mixins.late.angelica.AccessorDeferredWorldRend
 import net.coderbot.iris.Iris;
 import net.irisshaders.iris.api.v0.IrisApi;
 
-/// Use {@link AngelicaUtils_WRAPPER}
+/// Use {@link AngelicaUtilsW}
 class AngelicaUtils {
 
     protected static boolean isShaderEnabled() {
-        return IrisApi.getInstance()
-            .isShaderPackInUse();
+        return IrisApi.getInstance().isShaderPackInUse();
     }
 
     protected static boolean isComplementary() {
-        if (!isShaderEnabled()) {
-            return false;
-        }
-        String name = Iris.getIrisConfig()
-            .getShaderPackName()
-            .orElse(null);
+        if (!isShaderEnabled()) return false;
+        String name = Iris.getIrisConfig().getShaderPackName().orElse(null);
         return name != null && name.contains("Complementary");
     }
 
     protected static boolean isShadowPass() {
-        return IrisApi.getInstance()
-            .isRenderingShadowPass();
+        return IrisApi.getInstance().isRenderingShadowPass();
     }
     
     protected static int getShadowMapResolution() {
-        if (!isShaderEnabled()) {
-            return 0;
-        }
+        if (!isShaderEnabled()) return 0;
         return Iris.getPipelineManager().getPipeline()
                 .map(pipe -> ((AccessorDeferredWorldRenderingPipeline) pipe)
-                        .getShadowMapResolution())
-                .orElse(0);
+                        .getShadowMapResolution()).orElse(0);
     }
 
 }

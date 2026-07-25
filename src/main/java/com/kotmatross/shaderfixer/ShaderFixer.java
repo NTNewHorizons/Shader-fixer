@@ -1,27 +1,26 @@
 package com.kotmatross.shaderfixer;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.Month;
-
-import net.minecraft.launchwrapper.Launch;
-import net.minecraftforge.common.MinecraftForge;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.kotmatross.shaderfixer.config.ShaderFixerConfig;
+import com.kotmatross.shaderfixer.handler.EventHandlerClientShaderFixer;
 import com.kotmatross.shaderfixer.proxy.CommonProxy;
 import com.kotmatross.shaderfixer.shrimp.BratvaAndTheRing;
-import com.kotmatross.shaderfixer.utils.BuiltInResourcePack;
-
+import com.kotmatross.shaderfixer.shrimp.BuiltInResourcePack;
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
 
 @Mod(
     modid = Tags.MODID,
@@ -33,11 +32,10 @@ import cpw.mods.fml.relauncher.Side;
         @Mod.CustomProperty(k = "iconFile", v = "shaderfixer.png"),
         @Mod.CustomProperty(k = "backgroundFile", v = "background.png") })
 public class ShaderFixer {
-
     public static final Logger logger = LogManager.getLogger("SHADER_FIXER");
     public static boolean IS_ANGELICA_PRESENT = false;
-    public static boolean IS_HBM_NTM_PRESENT = false;
-    public static boolean IS_HBM_NTM_SPACE_PRESENT = false;
+    public static boolean IS_NTM_PRESENT = false;
+    public static boolean IS_NTM_SPACE_PRESENT = false;
 
     @SidedProxy(
         clientSide = "com.kotmatross.shaderfixer.proxy.ClientProxy",
@@ -63,19 +61,15 @@ public class ShaderFixer {
         event.getModMetadata().authorList.clear();
         event.getModMetadata().authorList.add("§1§lK§1§lo§9§lt§b§lm§f§la§1§lt§1§lr§9§lo§b§ls§f§ls");
 
-        if (Loader.isModLoaded("angelica")) 
-            IS_ANGELICA_PRESENT = true;
-        if (Loader.isModLoaded("hbm"))
-            IS_HBM_NTM_PRESENT = true;
+        if (Loader.isModLoaded("angelica")) IS_ANGELICA_PRESENT = true;
+        if (Loader.isModLoaded("hbm")) IS_NTM_PRESENT = true;
         try {
-            if (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null) {
-                IS_HBM_NTM_SPACE_PRESENT = true;
-            }
+            if (Launch.classLoader.getClassBytes("com.hbm.dim.SolarSystem") != null) 
+                IS_NTM_SPACE_PRESENT = true;
         } catch (IOException ignored) {}
         
         if (event.getSide() == Side.CLIENT) {
-            
-            if (IS_HBM_NTM_PRESENT)
+            if (IS_NTM_PRESENT)
                 applyTextureFix(ShaderFixerConfig.NTM_TEXTURE_FIX, "NTM_FIX", "NTM_TEXTURE_FIX");
             if (Loader.isModLoaded("Techguns"))
                 applyTextureFix(ShaderFixerConfig.TECHGUNS_TEXTURE_FIX, "TECHGUNS_FIX", "TECHGUNS_TEXTURE_FIX");
@@ -85,6 +79,8 @@ public class ShaderFixer {
                 BratvaAndTheRing SenyaGanjubas = new BratvaAndTheRing();
                 MinecraftForge.EVENT_BUS.register(SenyaGanjubas);
             }
+            EventHandlerClientShaderFixer handler = new EventHandlerClientShaderFixer();
+            FMLCommonHandler.instance().bus().register(handler);
         }
     }
 

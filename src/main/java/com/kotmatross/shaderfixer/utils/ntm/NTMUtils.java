@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.hbm.config.ClientConfig;
 import com.hbm.render.item.weapon.sedna.ItemRenderWeaponBase;
 
-/// Use {@link NTMUtils_WRAPPER}
+/// Use {@link NTMUtilsW}
 class NTMUtils {
 
     protected static void handleInterpolation(float interp) {

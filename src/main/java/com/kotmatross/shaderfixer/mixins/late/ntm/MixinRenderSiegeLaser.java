@@ -1,25 +1,26 @@
 package com.kotmatross.shaderfixer.mixins.late.ntm;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+import com.hbm.entity.projectile.EntitySiegeLaser;
 import com.hbm.render.entity.projectile.RenderSiegeLaser;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(value = RenderSiegeLaser.class, priority = 999, remap = false)
 public class MixinRenderSiegeLaser {
-
-    @Inject(method = "renderDart"
-            , at = @At(value = "HEAD"))
-    private void renderDart(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
+    
+    @WrapMethod(method = "renderDart")
+    private void doThatDoThatThing(EntitySiegeLaser laser, Operation<Void> original) {
+        if (!AngelicaUtilsW.isShadowPass()) {
+            ShaderUtils.enableFullBrightness();
+            try {
+                original.call(laser);
+            } finally {
+                ShaderUtils.disableFullBrightness();
+            }
+        }
     }
 
-    @Inject(method = "renderDart"
-            , at = @At(value = "TAIL"))
-    private void renderDar2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
-    }
 }

@@ -1,28 +1,25 @@
 package com.kotmatross.shaderfixer.mixins.late.signpic;
 
+import com.kamesuta.mc.signpic.entry.content.Content;
+import com.kamesuta.mc.signpic.render.StateRender;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.kamesuta.mc.signpic.render.StateRender;
 
 @Mixin(value = StateRender.class, priority = 999, remap = false)
 public class MixinStateRender {
-
-    @Inject(method = "drawMessage"
-            , at = @At(value = "HEAD"))
-    private static void drawMessage(CallbackInfo ci) {
+    
+    @WrapMethod(method = "drawMessage")
+    private static void doThatDoThatThing(Content content, FontRenderer fontrenderer, Operation<Void> original) {
         GL11.glPushAttrib(GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-    }
-
-    @Inject(method = "drawMessage"
-            , at = @At(value = "TAIL"))
-    private static void drawMessage2(CallbackInfo ci) {
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glPopAttrib();
+        try {
+            original.call(content, fontrenderer);
+        } finally {
+            GL11.glPopAttrib();
+        }
     }
 
 }

@@ -1,31 +1,25 @@
 package com.kotmatross.shaderfixer.mixins.late.fiskheroes;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import com.fiskmods.heroes.client.pack.json.shape.IShapeFormat;
+import com.fiskmods.heroes.client.pack.json.shape.JsonShape;
 import com.fiskmods.heroes.client.pack.json.shape.ShapeFormatLines;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.entity.Entity;
+import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(value = ShapeFormatLines.class, priority = 999)
+@Mixin(value = ShapeFormatLines.class, priority = 999, remap = false)
 public abstract class MixinShapeFormatLines implements IShapeFormat {
-
-    @Inject(method = "render"
-            , at = @At(value = "INVOKE"
-                , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawing(I)V"
-                , shift = At.Shift.BEFORE))
-    public void render(CallbackInfo ci) {
+    
+    @WrapMethod(method = "render")
+    private void doThatDoThatThing(JsonShape shape, Entity entity, float mult, float ticks, Operation<Void> original) {
         ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = "render"
-            , at = @At(value = "INVOKE"
-                , target = "Lnet/minecraft/client/renderer/Tessellator;draw()I"
-                , shift = At.Shift.AFTER))
-    public void render2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
+        try {
+            original.call(shape, entity, mult, ticks);
+        } finally {
+            ShaderUtils.disableFullBrightness();
+        }
     }
 
 }

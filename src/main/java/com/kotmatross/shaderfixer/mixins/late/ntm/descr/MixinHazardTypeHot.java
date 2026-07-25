@@ -21,12 +21,12 @@ import com.llamalad7.mixinextras.sugar.Local;
 public class MixinHazardTypeHot {
 
     @Unique
-    boolean shader_fixer$reacher;
+    boolean sf$reacher;
 
     @Inject(method = "onUpdate"
             , at = @At(value = "TAIL"))
     public void onUpdate(CallbackInfo ci, @Local(name = "reacher") boolean reacher) {
-        shader_fixer$reacher = reacher;
+        sf$reacher = reacher;
     }
 
     @Inject(method = "addHazardInformation"
@@ -34,13 +34,9 @@ public class MixinHazardTypeHot {
     public void addHazardInformation(EntityPlayer player, List list, float level, ItemStack stack,
         List<HazardModifier> modifiers, CallbackInfo ci) {
         if (level > 0) {
-            if (shader_fixer$reacher) {
-                list.add(EnumChatFormatting.STRIKETHROUGH + I18n.format("trait.danger.level.hot")
-                        + level + I18n.format("info.template__seconds"));
-            } else {
-                list.add(EnumChatFormatting.RED + I18n.format("trait.danger.level.hot")
-                        + level + I18n.format("info.template__seconds"));
-            }
+            list.add( (sf$reacher ? EnumChatFormatting.STRIKETHROUGH : EnumChatFormatting.RED) 
+                    + I18n.format("trait.danger.level.hot") + level 
+                    + I18n.format("info.template__seconds"));
         }
     }
 

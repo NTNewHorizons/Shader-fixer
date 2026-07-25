@@ -1,0 +1,20 @@
+package com.kotmatross.shaderfixer.mixins.late.opencomputers;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import li.cil.oc.util.RenderState$;
+
+@Mixin(value = RenderState$.class, priority = 999, remap = false)
+public class MixinRenderState {
+    
+    @Inject(method = "compilingDisplayList"
+            , at = @At(value = "HEAD")
+            , cancellable = true)
+    private void disableDL(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(true);
+    }
+
+}

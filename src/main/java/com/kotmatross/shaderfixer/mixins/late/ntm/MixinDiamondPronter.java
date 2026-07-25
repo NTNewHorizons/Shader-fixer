@@ -25,7 +25,8 @@ public class MixinDiamondPronter {
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"
                 , shift = At.Shift.AFTER))
-    private static void fixLightingWithShaders(CallbackInfo ci, @Local Tessellator tess) {
+    private static void fixLightingWithShaders(CallbackInfo ci, @Local(name = "tess") Tessellator tess) {
         tess.setNormal(1, 0, 0);
     }
+    
 }

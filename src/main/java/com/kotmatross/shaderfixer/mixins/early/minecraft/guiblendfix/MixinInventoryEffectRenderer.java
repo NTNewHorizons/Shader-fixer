@@ -15,7 +15,6 @@ public class MixinInventoryEffectRenderer {
     @Inject(method = "func_147044_g"
             , at = @At("HEAD"))
     public void func_147044_g(CallbackInfo ci) {
-        GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
     }
@@ -24,7 +23,6 @@ public class MixinInventoryEffectRenderer {
             , at = @At("TAIL"))
     public void func_147044_g2(CallbackInfo ci) {
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
     }
 
 }

@@ -24,7 +24,7 @@ public class MixinRenderRBMKFuelChannel {
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/Tessellator;startDrawingQuads()V"
                 , shift = At.Shift.BEFORE))
-    public void func_147500_a(CallbackInfo ci) {
+    public void eFB(CallbackInfo ci) {
         ShaderUtils.enableFullBrightness();
     }
 
@@ -32,7 +32,7 @@ public class MixinRenderRBMKFuelChannel {
             , at = @At(value = "INVOKE"
                 , target = "Lnet/minecraft/client/renderer/Tessellator;draw()I"
                 , shift = At.Shift.AFTER))
-    public void func_147500_a2(CallbackInfo ci) {
+    public void dFB(CallbackInfo ci) {
         ShaderUtils.disableFullBrightness();
     }
 

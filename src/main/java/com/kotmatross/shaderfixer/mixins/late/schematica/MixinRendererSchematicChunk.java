@@ -16,18 +16,16 @@ public class MixinRendererSchematicChunk {
     @Inject(method = "updateRenderer"
             , at = @At(value = "INVOKE"
                 , target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V"))
-    public void updateRenderer$programS(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(ShaderUtils.getCurrentProgram());
+    public void updateRenderer$programS(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        sf$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
     @Inject(method = "updateRenderer"
             , at = @At(value = "INVOKE"
                 , target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V"))
-    public void updateRenderer$programE(CallbackInfo ci,
-        @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        ShaderUtils.useProgram(shader_fixer$program.get());
+    public void updateRenderer$programE(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        ShaderUtils.useProgram(sf$program.get());
     }
 
 }

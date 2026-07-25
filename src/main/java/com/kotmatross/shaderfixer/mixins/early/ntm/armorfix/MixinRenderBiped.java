@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.ShaderFixer;
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 import com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(value = RenderBiped.class, priority = 999)
@@ -31,14 +31,14 @@ public class MixinRenderBiped {
     @Inject(method = "renderEquippedItems(Lnet/minecraft/entity/EntityLiving;F)V"
             , at = @At(value = "HEAD"))
     public void renderAkimbo(CallbackInfo ci, @Local(argsOnly = true) EntityLiving entity) {
-        if (ShaderFixer.IS_HBM_NTM_PRESENT) {
+        if (ShaderFixer.IS_NTM_PRESENT) {
             ItemStack held = entity.getHeldItem();
             if (held != null) {
                 IItemRenderer customRenderer = MinecraftForgeClient
                     .getItemRenderer(held, IItemRenderer.ItemRenderType.EQUIPPED);
 
-                if (NTMUtils_WRAPPER.isAkimboRenderer(customRenderer, entity)
-                    || NTMUtils_WRAPPER.isLeftRenderer(customRenderer)) {
+                if (NTMUtilsW.isAkimboRenderer(customRenderer, entity)
+                    || NTMUtilsW.isLeftRenderer(customRenderer)) {
                     GL11.glPushMatrix();
 
                     this.modelBipedMain.bipedLeftArm.isHidden = false;
@@ -61,7 +61,7 @@ public class MixinRenderBiped {
                     GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
                     GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
 
-                    NTMUtils_WRAPPER.akimboSetupNRender(customRenderer, held, entity);
+                    NTMUtilsW.akimboSetupNRender(customRenderer, held, entity);
 
                     GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 

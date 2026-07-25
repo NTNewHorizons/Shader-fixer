@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 import com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(value = HandRenderer.class, priority = 999, remap = false)
@@ -18,9 +18,8 @@ public class MixinHandRenderer {
     @Inject(method = "setupGlState"
             , at = @At(value = "HEAD"))
     public void handleInterp(CallbackInfo ci, @Local(argsOnly = true) float tickDelta) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            NTMUtils_WRAPPER.handleInterpolation(tickDelta);
-        }
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) 
+            NTMUtilsW.handleInterpolation(tickDelta);
     }
 
     @ModifyArg(method = "setupGlState"
@@ -30,9 +29,8 @@ public class MixinHandRenderer {
             , ordinal = 0)
             , index = 1)
     private boolean applyFovCFG(boolean useFOVSetting) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) {
-            return NTMUtils_WRAPPER.getFOVConf();
-        }
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON)) 
+            return NTMUtilsW.getFOVConf();
         return false;
     }
 

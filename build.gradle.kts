@@ -3,4 +3,10 @@ plugins {
     id("com.gtnewhorizons.gtnhconvention")
 }
 
-version = "5.4"
+//minecraft {
+//    extraRunJvmArguments.add("-Dangelica.dumpClass=true")
+//    extraRunJvmArguments.add("-Dorg.lwjgl.util.Debug=true")
+//    extraRunJvmArguments.add("-Dangelica.redirectorLogspam=true")
+//}
+
+version = "5.5"

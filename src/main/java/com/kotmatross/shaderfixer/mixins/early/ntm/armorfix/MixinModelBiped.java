@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.kotmatross.shaderfixer.ShaderFixer;
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 import com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(value = ModelBiped.class, priority = 999)
@@ -34,12 +34,12 @@ public class MixinModelBiped {
     @Inject(method = "setRotationAngles"
             , at = @At(value = "TAIL"))
     public void setRotationAngles(CallbackInfo ci, @Local(argsOnly = true) Entity entity) {
-        if (ShaderFixer.IS_HBM_NTM_PRESENT) {
+        if (ShaderFixer.IS_NTM_PRESENT) {
             if ((entity instanceof EntityLivingBase entityLivingBase)) {
-                if (NTMUtils_WRAPPER.checkVibe_Akimbo(entityLivingBase)) {
+                if (NTMUtilsW.checkVibe_Akimbo(entityLivingBase)) {
                     this.bipedLeftArm.rotateAngleY = 0.1F + this.bipedHead.rotateAngleY;
                 }
-                if (NTMUtils_WRAPPER.checkVibe_Left(entityLivingBase)) {
+                if (NTMUtilsW.checkVibe_Left(entityLivingBase)) {
                     this.bipedLeftArm.rotateAngleY = 0.1F + this.bipedHead.rotateAngleY;
                     this.bipedRightArm.rotateAngleY = -0.5F + this.bipedHead.rotateAngleY;
                 }

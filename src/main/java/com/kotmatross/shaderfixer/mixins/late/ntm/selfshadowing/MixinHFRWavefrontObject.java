@@ -4,7 +4,7 @@ import com.hbm.render.loader.HFRWavefrontObject;
 import com.kotmatross.shaderfixer.shrimp.nonsense.DoubleFuckingCursedAward;
 import com.kotmatross.shaderfixer.shrimp.ntm.HFRWavefrontObjectShadowProxy;
 import com.kotmatross.shaderfixer.shrimp.ntm.ModelShadowProxyExtended;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.client.renderer.Tessellator;
@@ -24,8 +24,10 @@ import java.io.IOException;
 @Mixin(value = HFRWavefrontObject.class, priority = 999, remap = false)
 public class MixinHFRWavefrontObject implements ModelShadowProxyExtended {
 	
-	@Unique public HFRWavefrontObjectShadowProxy shadowProxyModel;
-	@Shadow public ResourceLocation resource;
+	@Unique 
+	public HFRWavefrontObjectShadowProxy shadowProxyModel;
+	@Shadow 
+	public ResourceLocation resource;
 	
 	@Override
 	public HFRWavefrontObjectShadowProxy getProxy() {
@@ -45,8 +47,7 @@ public class MixinHFRWavefrontObject implements ModelShadowProxyExtended {
 	@Inject(method = "destroy"
 			, at = @At(value = "TAIL"))
 	private void destroy(CallbackInfo ci) {
-		if (shadowProxyModel != null)
-			this.shadowProxyModel.destroy();
+		if (shadowProxyModel != null) this.shadowProxyModel.destroy();
 	}
 	
 	@Inject(method = "loadObjModel"
@@ -54,8 +55,7 @@ public class MixinHFRWavefrontObject implements ModelShadowProxyExtended {
 	private void loadObjModel(CallbackInfo ci) {
 		if (shadowProxyModel != null) {
 			try {
-				this.shadowProxyModel.loadObjModel(ModelShadowProxyExtended
-						.hijackResourceToStream(this.resource));
+				this.shadowProxyModel.loadObjModel(ModelShadowProxyExtended.hijackResourceToStream(this.resource));
 			} catch(IOException ignored) {
 				this.shadowProxyModel = null;
 			}
@@ -64,74 +64,50 @@ public class MixinHFRWavefrontObject implements ModelShadowProxyExtended {
 	
 	@WrapMethod(method = "renderAll")
 	private void renderAll(Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.renderAll();
-		} else {
-			original.call();
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.renderAll();
+		else original.call();
 	}
 	
 	@WrapMethod(method = "tessellateAll")
 	private void tessellateAll(Tessellator tessellator, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.tessellateAll(tessellator);
-		} else {
-			original.call(tessellator);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.tessellateAll(tessellator);
+		else original.call(tessellator);
 	}
 	
 	@WrapMethod(method = "renderOnly")
 	private void renderOnly(String[] groupNames, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.renderOnly(groupNames);
-		} else {
-			original.call((Object) groupNames);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.renderOnly(groupNames);
+		else original.call((Object) groupNames);
 	}
 	
 	@WrapMethod(method = "tessellateOnly")
 	private void tessellateOnly(Tessellator tessellator, String[] groupNames, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.tessellateOnly(tessellator, groupNames);
-		} else {
-			original.call(tessellator, groupNames);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.tessellateOnly(tessellator, groupNames);
+		else original.call(tessellator, groupNames);
 	}
 	
 	@WrapMethod(method = "renderPart")
 	private void renderPart(String partName, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.renderPart(partName);
-		} else {
-			original.call(partName);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.renderPart(partName);
+		else original.call(partName);
 	}
 	
 	@WrapMethod(method = "tessellatePart")
 	private void tessellatePart(Tessellator tessellator, String partName, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.tessellatePart(tessellator, partName);
-		} else {
-			original.call(tessellator, partName);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.tessellatePart(tessellator, partName);
+		else original.call(tessellator, partName);
 	}
 	
 	@WrapMethod(method = "renderAllExcept")
 	private void renderAllExcept(String[] excludedGroupNames, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.renderAllExcept(excludedGroupNames);
-		} else {
-			original.call((Object) excludedGroupNames);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.renderAllExcept(excludedGroupNames);
+		else original.call((Object) excludedGroupNames);
 	}
 	
 	@WrapMethod(method = "tessellateAllExcept")
 	private void tessellateAllExcept(Tessellator tessellator, String[] excludedGroupNames, Operation<Void> original) {
-		if (AngelicaUtils_WRAPPER.isShadowPass() && shadowProxyModel != null) {
-			shadowProxyModel.tessellateAllExcept(tessellator, excludedGroupNames);
-		} else {
-			original.call(tessellator, excludedGroupNames);
-		}
+		if (AngelicaUtilsW.isShadowPass() && shadowProxyModel != null) shadowProxyModel.tessellateAllExcept(tessellator, excludedGroupNames);
+		else original.call(tessellator, excludedGroupNames);
 	}
 
 }

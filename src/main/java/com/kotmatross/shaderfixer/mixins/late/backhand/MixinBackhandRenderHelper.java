@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kotmatross.shaderfixer.utils.ntm.NTMUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.ntm.NTMUtilsW;
 
 import xonin.backhand.client.utils.BackhandRenderHelper;
 
@@ -18,9 +18,7 @@ public class MixinBackhandRenderHelper {
             , at = @At(value = "HEAD")
             , cancellable = true)
     private static void renderOffhandItemIn3rdPerson(CallbackInfo ci) {
-        if (NTMUtils_WRAPPER.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED)) {
-            ci.cancel();
-        }
+        if (NTMUtilsW.checkVibe(IItemRenderer.ItemRenderType.EQUIPPED)) ci.cancel();
     }
 
 }

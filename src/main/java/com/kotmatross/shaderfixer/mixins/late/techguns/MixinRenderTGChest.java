@@ -17,10 +17,8 @@ public class MixinRenderTGChest {
     @Inject(method = "renderTileEntityAt(Ltechguns/tileentities/TGChestTileEnt;DDDF)V"
             , at = @At(value = "HEAD")
             , cancellable = true)
-    public void renderTileEntityAt(CallbackInfo ci, @Local(argsOnly = true) TGChestTileEnt chestTileEnt) {
-        if (!(chestTileEnt.getBlockType() instanceof BlockTGChest)) {
-            ci.cancel();
-        }
+    public void fixCCE(CallbackInfo ci, @Local(argsOnly = true) TGChestTileEnt chestTileEnt) {
+        if (!(chestTileEnt.getBlockType() instanceof BlockTGChest)) ci.cancel();
     }
 
 }

@@ -6,13 +6,11 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.hbm.render.util.BeamPronter;
 import com.kotmatross.shaderfixer.shrimp.SPEKJORK;
-import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtils_WRAPPER;
+import com.kotmatross.shaderfixer.utils.angelica.AngelicaUtilsW;
 import com.kotmatross.shaderfixer.utils.ShaderUtils;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -25,27 +23,20 @@ public class MixinBeamPronter {
     private static final String prontBeamDescSpace = "prontBeam(Lnet/minecraft/util/Vec3;Lcom/hbm/render/util/BeamPronter$EnumWaveType;Lcom/hbm/render/util/BeamPronter$EnumBeamType;IIIIFIFF)V";
 
     @WrapMethod(method = prontBeamDescSpace)
-    private static void dontCastShadow(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
+    private static void doThatDoThatThing(Vec3 skeleton, BeamPronter.EnumWaveType wave, BeamPronter.EnumBeamType beam,
         int outerColor, int innerColor, int start, int segments, float size, int layers, float thickness, float alpha,
         Operation<Void> original) {
-        if (!AngelicaUtils_WRAPPER.isShadowPass()) {
-            original.call(skeleton, wave, beam,
-                    outerColor, innerColor, start, segments, size, layers, thickness, alpha);
+        if (!AngelicaUtilsW.isShadowPass()) {
+            ShaderUtils.enableFullBrightness();
+            try {
+                original.call(skeleton, wave, beam,
+                        outerColor, innerColor, start, segments, size, layers, thickness, alpha);
+            } finally {
+                ShaderUtils.disableFullBrightness();
+            }
         }
     }
-
-    @Inject(method = prontBeamDescSpace
-            , at = @At(value = "HEAD"))
-    private static void prontBeam(CallbackInfo ci) {
-        ShaderUtils.enableFullBrightness();
-    }
-
-    @Inject(method = prontBeamDescSpace
-            , at = @At(value = "TAIL"))
-    private static void prontBeam2(CallbackInfo ci) {
-        ShaderUtils.disableFullBrightness();
-    }
-
+    
     // Fix alpha != 1
     // For some reason, James put 256 (and 0.5) as the alpha value
     @Redirect(method = "setColorWithAlpha"

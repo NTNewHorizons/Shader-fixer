@@ -14,18 +14,18 @@ import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
 public class MixinCosmicRenderShenanigans {
 
     @Unique
-    private static int shader_fixer$previousProgram;
+    private static int sf$previousProgram;
 
     @Inject(method = "useShader"
             , at = @At(value = "HEAD"))
     private static void useShader(CallbackInfo ci) {
-        shader_fixer$previousProgram = ShaderUtils.getCurrentProgram();
+        sf$previousProgram = ShaderUtils.getCurrentProgram();
     }
 
     @Inject(method = "releaseShader"
             , at = @At(value = "TAIL"))
     private static void releaseShader(CallbackInfo ci) {
-        ShaderUtils.useProgram(shader_fixer$previousProgram);
+        ShaderUtils.useProgram(sf$previousProgram);
     }
 
 }

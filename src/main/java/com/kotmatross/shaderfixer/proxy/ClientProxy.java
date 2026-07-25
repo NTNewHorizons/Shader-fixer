@@ -1,6 +1,6 @@
 package com.kotmatross.shaderfixer.proxy;
 
-import com.kotmatross.shaderfixer.utils.IncompatibleModException;
+import com.kotmatross.shaderfixer.shrimp.IncompatibleModException;
 
 public class ClientProxy extends CommonProxy {
     @Override

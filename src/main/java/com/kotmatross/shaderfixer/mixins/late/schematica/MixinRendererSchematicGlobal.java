@@ -15,14 +15,14 @@ public class MixinRendererSchematicGlobal {
 
     @Inject(method = "render"
             , at = @At(value = "HEAD"))
-    public void render$programS(CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        shader_fixer$program.set(ShaderUtils.getCurrentProgram());
+    public void render$programS(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        sf$program.set(ShaderUtils.getCurrentProgram());
         ShaderUtils.useDefaultProgram();
     }
 
     @Inject(method = "render"
             , at = @At(value = "TAIL"))
-    public void render$programE(CallbackInfo ci, @Share("shader_fixer$program") LocalIntRef shader_fixer$program) {
-        ShaderUtils.useProgram(shader_fixer$program.get());
+    public void render$programE(CallbackInfo ci, @Share("sf$program") LocalIntRef sf$program) {
+        ShaderUtils.useProgram(sf$program.get());
     }
 }
