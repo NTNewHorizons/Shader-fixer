@@ -4,8 +4,6 @@ bsod.invalid=Обнаружено недопустимое внутренней 
 bsod.crash.attrib=Предотвращено потенциальное повреждение мира и ложный stacktrace краша
 
 bsod.esc=* Нажмите ESC, чтобы безопасно вернуться в главное меню.
-bsod.enter=* Нажмите ENTER, чтобы сообщить об ошибке:
-bsod.log=Прикрепите файл `logs/fml-client-latest.log`.
 
 # HbmExtendedHazardDescriptions
 info.template__seconds= секунд(ы)

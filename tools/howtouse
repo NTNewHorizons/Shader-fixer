@@ -1,0 +1,16 @@
+
+Automated scripts for various model files conversions (NTM_SHADOW_FIX)
+
+Each script contains variables that need to be changed:
+    - ROOT_DIR: main directory for which conversions are performed
+    - BLENDER_PATH: path to the installed Blender
+
+# objOptimizer9000.py
+Optimizes OBJ file's size: removes trailing zeros and reduces precision to 5 decimals
+
+# tessellator3000UltraProMaxv3.py
+Finds edges > EDGE_THRESHOLD (default 1.7) and subdivides them
+(if no such edges are found, the file is deleted)
+
+# tessellator3000UltraProMaxv3_COLLADA.py
+Same as tessellator3000UltraProMaxv3, but for collada

@@ -1,13 +1,12 @@
-# ShaderFixer
+# DISCONTINUED
 
-[![github](images/badges/github.png)](https://github.com/kotmatross28729/Shader-fixer)
-[![curseforge](images/badges/curse.png)](https://www.curseforge.com/minecraft/mc-mods/shader-fixer)
-[![modrinth](images/badges/modrinth.png)](https://modrinth.com/mod/shader-fixer)
-![forge](images/badges/forge.png)
+**Mod is no longer maintained as of 10/08/2026.**
+
+Code is in the public domain; do whatever you want.
 
 ---
 
-A **set of patches** for various mods, fixes **some** issues with Angelica / Angelica Shaders. Also has QoL features and vanilla fixes
+A set of patches for various mods, fixes some issues with Angelica / Angelica Shaders. Also has QoL features and vanilla fixes
 
 *Do not expect this mod to fix all your shader problems, it only fixes what is explicitly stated below.*
 
@@ -94,3 +93,8 @@ A **set of patches** for various mods, fixes **some** issues with Angelica / Ang
 **SignPicture [`SIGNPIC_FIX`]**
   - Fixed multiple GL leaks when rendering pictures
   - [Shaders] Fixed pictures casting shadows
+
+[![github](images/badges/github.png)](https://github.com/kotmatross28729/Shader-fixer)
+[![curseforge](images/badges/curse.png)](https://www.curseforge.com/minecraft/mc-mods/shader-fixer)
+[![modrinth](images/badges/modrinth.png)](https://modrinth.com/mod/shader-fixer)
+![forge](images/badges/forge.png)

@@ -28,10 +28,10 @@ import java.time.Month;
     name = Tags.MODNAME,
     acceptedMinecraftVersions = Tags.MCVERSION,
     customProperties = { @Mod.CustomProperty(k = "license", v = "MIT"),
-        @Mod.CustomProperty(k = "issueTrackerUrl", v = "https://github.com/kotmatross28729/Shader-fixer/issues"),
         @Mod.CustomProperty(k = "iconFile", v = "shaderfixer.png"),
         @Mod.CustomProperty(k = "backgroundFile", v = "background.png") })
 public class ShaderFixer {
+    
     public static final Logger logger = LogManager.getLogger("SHADER_FIXER");
     public static boolean IS_ANGELICA_PRESENT = false;
     public static boolean IS_NTM_PRESENT = false;

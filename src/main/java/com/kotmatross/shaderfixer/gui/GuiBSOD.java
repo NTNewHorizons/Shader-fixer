@@ -19,8 +19,6 @@ public class GuiBSOD extends GuiScreen {
 	public static final int MAIN_RECT = 0xffc0c0c0;
 	public static final int MAIN_RECT_TEXT = 0xff000000;
 	
-	public static final String url = "https://github.com/kotmatross28729/Shader-fixer/issues/new";
-	
 	/// ---
 
 	public static class BSOD_ENTRY {
@@ -77,9 +75,6 @@ public class GuiBSOD extends GuiScreen {
 		/// ---
 		
 		String LN_2 = I18n.format("bsod.esc"); this.drawLineCentered(LN_2, CX, CURRENT_Y); CURRENT_Y += SPACING;
-		String LN_3 = I18n.format("bsod.enter"); this.drawLineCentered(LN_3, CX, CURRENT_Y); CURRENT_Y += SPACING;
-		String LN_3X = "  https://github.com/kotmatross28729/Shader-fixer/issues."; this.drawLineCentered(LN_3X, CX, CURRENT_Y); CURRENT_Y += SPACING;
-		String LN_4 = I18n.format("bsod.log"); this.drawLineCentered(LN_4, CX, CURRENT_Y); 
 		CURRENT_Y += SPACING * 3;
 		
 		/// ---
@@ -113,9 +108,6 @@ public class GuiBSOD extends GuiScreen {
 	
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) {
-		if(keyCode == Keyboard.KEY_NUMPADENTER || keyCode == Keyboard.KEY_RETURN) {
-			openURL(url);
-		}
 		if(keyCode == Keyboard.KEY_ESCAPE) {
 			if (this.mc.theWorld != null) 
 				this.mc.theWorld.sendQuittingDisconnectingPacket();

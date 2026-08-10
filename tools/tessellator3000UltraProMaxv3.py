@@ -1,11 +1,9 @@
-# what the fuck
-
 import os
 import sys
 import subprocess
 
-ROOT_DIR = r"C:\Users\1\Desktop\WorkSpace2\Shaders-fixer\src\main\resources\assets\shaderfixer\models"
-BLENDER_PATH = r"C:\Program Files\Blender Foundation\Blender 3.4\blender.exe"
+ROOT_DIR = r""
+BLENDER_PATH = r""
 
 EDGE_THRESHOLD = 1.7
 
@@ -90,7 +88,7 @@ def main():
     else:
         blenderPath = BLENDER_PATH
         if not blenderPath or not os.path.exists(blenderPath):
-            defPath = r"C:\Program Files\Blender Foundation\Blender 3.4\blender.exe"
+            defPath = r""
             if os.path.exists(defPath):
                 blenderPath = defPath
             else:

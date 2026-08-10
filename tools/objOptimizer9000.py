@@ -1,7 +1,7 @@
 import os
 import re
 
-ROOT_DIR = r"C:\Users\1\Desktop\WorkSpace2\Shaders-fixer\src\main\resources\assets\shaderfixer\models"
+ROOT_DIR = r""
 
 def procNum(num):
     try:

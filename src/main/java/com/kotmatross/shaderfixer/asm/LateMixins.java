@@ -64,7 +64,6 @@ public enum LateMixins implements IMixins {
                 , "ntm.MixinDiamondPronter"
                 , "ntm.MixinItemRendererMeteorSword"
                 , "ntm.MixinParticleAmatFlash"
-                , "ntm.MixinRenderBeam"
                 , "ntm.MixinRenderBlackHole"
                 , "ntm.MixinRenderChemical"
                 , "ntm.MixinRenderCore"

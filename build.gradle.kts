@@ -9,4 +9,4 @@ plugins {
 //    extraRunJvmArguments.add("-Dangelica.redirectorLogspam=true")
 //}
 
-version = "5.5"
+version = "5.5-FINAL"

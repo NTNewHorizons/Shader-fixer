@@ -1,7 +1,6 @@
-# 5.5
+# 5.5-FINAL
 * **[Main]** Added a special crash screen in case of incorrect execution of some fixes (prevents hard crash)
 * **[Main]** Improved reliability of those fixes (in case corresponding mod is updated)
-* **[Hbm's NTM]** [TODO: I need to track these somehow...] Updated `NTM_SHADOW_FIX` models to X5768 <-- subject to change
 
 # 5.4
 *yet another formatting/code rework*

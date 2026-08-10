@@ -92,9 +92,9 @@ public class ShaderFixerConfig {
             , true
             , "Main NTM patch. See README");
         
-        NTM_SHADOW_FIX = config.getBoolean("NTM_SHADOW_FIX"
+        NTM_SHADOW_FIX = config.getBoolean("_NTM_SHADOW_FIX"
             , CAT_NTM
-            , true
+            , false
             , "Redirects the loading of all models to tessellated ones during the shadow pass. Fixes shadow distortion and self-shadowing on them");
         
         NTM_GUN_FIX = config.getBoolean("NTM_GUN_FIX"

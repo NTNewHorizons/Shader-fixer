@@ -4,8 +4,6 @@ bsod.invalid=Detected invalid internal state
 bsod.crash.attrib=Prevented potential world corruption and misleading crash stacktrace
 
 bsod.esc=* Press ESC to safely return to the main menu.
-bsod.enter=* Press ENTER to report an issue to:
-bsod.log=Attach the `logs/fml-client-latest.log` file.
 
 # HbmExtendedHazardDescriptions
 info.template__seconds= second(s)
