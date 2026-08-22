@@ -20,7 +20,7 @@ class AngelicaUtils {
     protected static boolean isShadowPass() {
         return IrisApi.getInstance().isRenderingShadowPass();
     }
-    
+
     protected static int getShadowMapResolution() {
         if (!isShaderEnabled()) return 0;
         return Iris.getPipelineManager().getPipeline()
