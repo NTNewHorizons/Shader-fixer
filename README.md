@@ -1,10 +1,4 @@
-# DISCONTINUED
-
-**Mod is no longer maintained as of 10/08/2026.**
-
-Code is in the public domain; do whatever you want.
-
----
+# Shader Fixer
 
 A set of patches for various mods, fixes some issues with Angelica / Angelica Shaders. Also has QoL features and vanilla fixes
 
