@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import li.cil.oc.util.RenderState$;
 
 @Mixin(value = RenderState$.class, priority = 999, remap = false)
-public class MixinRenderState {
-    
+public class MixinRenderState_disableDisplayList {
+
     @Inject(method = "compilingDisplayList"
             , at = @At(value = "HEAD")
             , cancellable = true)
