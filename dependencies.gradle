@@ -38,7 +38,7 @@ dependencies {
     
     /// Make everything local at this point, "Read timed out" - shut the fuck up
     
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Freecam:1.0.8:dev")  { transitive = false }
+    runtimeOnlyNonPublishable("com.caedis.freecam:Freecam:1.0.12:dev")  { transitive = false }
     //implementation(project.files("libs/gtnhlib-0.11.4-dev.jar"))
     
     implementation("com.github.GTNewHorizons:GTNHLib:0.11.32:dev")
